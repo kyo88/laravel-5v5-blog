@@ -10,8 +10,8 @@ node {
 
 
     stage('Deploy') {
-        sh 'docker rm $(docker ps -aq)'
-        sh 'cd src && docker-compose up'
+        //sh 'docker rm $(docker ps -aq)'
+        sh 'cd src && docker-compose up -d'
         sh 'docker ps'
     }
 }
