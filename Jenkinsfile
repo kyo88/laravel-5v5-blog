@@ -12,6 +12,6 @@ node {
     stage('Deploy') {
         //sh 'cd src && /usr/local/bin/docker-compose down'
         sh 'cd src && /usr/local/bin/docker-compose up -d'
-        sh 'cd src && /usr/local/bin/docker-compose run web php artisan migrate'
+        sh 'sleep 5000 && cd src && /usr/local/bin/docker-compose run web php artisan migrate'
     }
 }
