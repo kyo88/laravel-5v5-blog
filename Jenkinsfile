@@ -10,8 +10,8 @@ node {
 
 
     stage('Deploy') {
-        //sh 'docker rm $(docker ps -aq)'
+        //sh 'cd src && /usr/local/bin/docker-compose down'
         sh 'cd src && /usr/local/bin/docker-compose up -d'
-        sh 'docker ps'
+        sh 'cd src && /usr/local/bin/docker-compose run php src/artisan migrate'
     }
 }
