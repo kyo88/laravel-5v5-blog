@@ -1,0 +1,48 @@
+version: '3'
+services:
+    nginx:
+        image: kyo88kyo/nginx
+        ports:
+            - "9999:80"
+        networks:
+            - mynet
+        links:
+            - web
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+    web:
+        image: kyo88kyo/blog
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=database"
+        networks:
+            - mynet
+        deploy:
+            mode: replicated
+            replicas: 4
+            placement:
+                constraints: [node.role == worker]
+            resources:
+                limits:
+                    cpus: '0.1'
+                    memory: 256M
+    database:
+        image: mysql:5.6
+        environment:
+            - "MYSQL_ROOT_PASSWORD=Calldb@123456"
+            - "MYSQL_USER=blog"
+            - "MYSQL_PASSWORD=Blog@123456"
+            - "MYSQL_DATABASE=kyo"
+        ports:
+            - "33061:3306"
+        networks:
+            - mynet
+        deploy:
+            mode: replicated
+            replicas: 1
+            placement:
+                constraints: [node.role == worker]
+
+networks:
+    mynet:
