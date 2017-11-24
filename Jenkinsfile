@@ -8,6 +8,7 @@ node {
         }
     }
 
+
     stage('Deploy') {
         sh 'docker rm $(docker ps -aq)'
         sh 'cd src && docker-compose up'
