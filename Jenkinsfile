@@ -1,6 +1,21 @@
 node {
     checkout scm
 
+    stage('Build') {
+        parallel {
+            stage('Build Nginx') {
+              steps {
+                docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
+              }
+            }
+            stage('Build PHP') {
+              steps {
+                docker.build("kyo88kyo/web")
+              }
+            }
+        }
+    }
+
     docker.image('kyo88kyo/blog').inside {
         stage('Test') {
             sh 'php --version'
