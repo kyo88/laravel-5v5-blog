@@ -3,12 +3,10 @@ node {
 
     stage('Build') {
         parallel linux:{
-            stage('Build Nginx') {
-              steps {
+            node ('linux'){
+                  steps {
                 docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
               }
-            }
-            stage('Build PHP') {
               steps {
                 docker.build("kyo88kyo/blog")
               }
