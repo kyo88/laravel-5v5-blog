@@ -1,15 +1,11 @@
-node {
+node ('slave'){
     checkout scm
 
     stage('Build') {
-        parallel master:{
-            node ('master'){
-                checkout scm
-                sh 'cd src && /usr/local/bin/composer install'
-                docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
-                docker.build("kyo88kyo/blog")
-            }
-        }
+        checkout scm
+        sh 'cd src && /usr/local/bin/composer install'
+        docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
+        docker.build("kyo88kyo/blog")
     }
 
     stage('Test') {
