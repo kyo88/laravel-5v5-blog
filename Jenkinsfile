@@ -3,19 +3,17 @@ node ('slave'){
 
     stage('Build') {
         checkout scm
-        sh 'cd src && /usr/local/bin/composer install'
+        sh 'pwd && cd src && /usr/local/bin/composer install'
         docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
         docker.build("kyo88kyo/blog")
     }
 
     stage('Test') {
         docker.image('kyo88kyo/blog').inside {
-            sh 'sleep 2'
             sh 'php --version'
             sh 'cd /var/www/blog && ./vendor/bin/phpunit --testsuite Unit'
         }
     }
-
 
     stage('Deploy') {
         sh 'cd src && /usr/local/bin/docker-compose down'
