@@ -15,7 +15,7 @@ class PostTest extends TestCase
    */
   public function testExample()
   {
-    $response = $this->get(route('post.list'));
+    $response = $this->get(route('post.add'));
 
     $response->assertRedirect(route('login'));
   }
