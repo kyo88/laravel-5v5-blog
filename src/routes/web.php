@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -22,7 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/post/add', 'PostController@add')->name('post.add');
 Route::post('/post/confirm', 'PostController@confirm')->name('post.confirm');
 Route::post('/post/add', 'PostController@postAdd')->name('post.postAdd');
-Route::get('/post', 'PostController@lists')->name('post.list');
+Route::get('/', 'PostController@lists')->name('post.list');
 Route::get('/post/detail/{id}', 'PostController@detail')->where('id', '[0-9]+')->name('post.detail');
 
 

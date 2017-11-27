@@ -22,7 +22,10 @@ class PostController extends Controller
    */
   public function __construct()
   {
-    $this->middleware('auth');
+    $this->middleware('auth')->except([
+      'lists',
+      'detail',
+    ]);
   }
 
   public function add(Request $request)
