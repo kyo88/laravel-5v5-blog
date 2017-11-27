@@ -5,7 +5,7 @@ node {
         parallel master:{
             node ('master'){
                 checkout scm
-                sh 'cd src && compose install'
+                sh 'cd src && composer install'
                 docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
                 docker.build("kyo88kyo/blog")
             }
