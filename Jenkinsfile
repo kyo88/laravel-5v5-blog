@@ -10,7 +10,7 @@ node {
             }
             stage('Build PHP') {
               steps {
-                docker.build("kyo88kyo/web")
+                docker.build("kyo88kyo/blog")
               }
             }
         }
