@@ -1,7 +1,7 @@
 node {
     checkout scm
 
-    stage('Build') {
+    //stage('Build') {
         parallel {
             stage('Build Nginx') {
               steps {
@@ -14,7 +14,7 @@ node {
               }
             }
         }
-    }
+    //}
 
     docker.image('kyo88kyo/blog').inside {
         stage('Test') {
