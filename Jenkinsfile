@@ -4,12 +4,8 @@ node {
     stage('Build') {
         parallel master:{
             node ('master'){
-                  steps {
                 docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
-              }
-              steps {
                 docker.build("kyo88kyo/blog")
-              }
             }
         }
     }
