@@ -2,8 +2,8 @@ node {
     checkout scm
 
     stage('Build') {
-        parallel linux:{
-            node ('linux'){
+        parallel master:{
+            node ('master'){
                   steps {
                 docker.build("kyo88kyo/nginx", "-f Dockerfile-nginx .")
               }
