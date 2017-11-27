@@ -13,6 +13,7 @@ node {
 
     stage('Test') {
         docker.image('kyo88kyo/blog').inside {
+            sh 'hostname'
             sh 'php --version'
             sh 'cd /var/www/blog && ./vendor/bin/phpunit --testsuite Unit'
         }
